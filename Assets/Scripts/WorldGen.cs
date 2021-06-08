@@ -5,10 +5,11 @@ using UnityEngine;
 public class WorldGen : MonoBehaviour {
 
 	public Transform grass, dirt, stone, bedrock;
+	public Transform terrain;
 
 	void Start() {
-		int groundLevel = 24;
-		int mapSize = 32;
+		int groundLevel = 12;
+		int mapSize = 24;
 		for (int i = 0; i < mapSize; i++) {
 			for (int j = 0; j < mapSize; j++) {
 				SpawnBlock(grass, i, groundLevel, j);
@@ -26,7 +27,9 @@ public class WorldGen : MonoBehaviour {
     }
 
 	void SpawnBlock(Transform block, float x, float y, float z) {
-		Instantiate(block, new Vector3(x, y, z), block.rotation);
+		Transform newBlock = Instantiate(block, new Vector3(x, y, z), block.rotation);
+		newBlock.gameObject.layer = LayerMask.NameToLayer("Ground");
+		newBlock.SetParent(terrain);
 	}
 
 }
