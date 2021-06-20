@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 851950000}
-  speed: 12
+  speed: 8
   gravity: -30
   jumpHeight: 4
   groundChecker: {fileID: 154556697}
@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -413,8 +414,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df404b1f4fd2084aacbaaa6eacbb139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 300
+  sensitivity: 200
   playerBody: {fileID: 851950001}
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42162eca961a9a743962d957a0aba467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockReach: 10
 --- !u!1 &1918158785
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,6 +518,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2115747254}
   - component: {fileID: 2115747253}
+  - component: {fileID: 2115747255}
   m_Layer: 10
   m_Name: Terrain
   m_TagString: Untagged
@@ -523,22 +538,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ca9daf1354c1645a5c43355ba955c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockData:
-  - name: air
-    model: {fileID: 0}
-  - name: barrier
-    model: {fileID: 604388231842466912, guid: 361aeb03a2649444191a33b4d9780a44, type: 3}
-  - name: stone
-    model: {fileID: 5125804347229492512, guid: 849dd829a4791304e9cf6e7d9bce7611, type: 3}
-  - name: bedrock
-    model: {fileID: 1361619543137399785, guid: 965b277ae156e404bb6a6ee7ce913fcc, type: 3}
-  - name: dirt
-    model: {fileID: 1437554377093615146, guid: d7197c52dff827a40b26d020b18b86c0, type: 3}
-  - name: grass
-    model: {fileID: 4887314937467705929, guid: 2936428878f2d884ba6ca00c437baf49, type: 3}
-  terrain: {fileID: 2115747254}
   groundLevel: 12
+  bedrockLevel: 0
   mapSize: 24
+  mapCorner: -12
 --- !u!4 &2115747254
 Transform:
   m_ObjectHideFlags: 0
@@ -553,3 +556,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2115747255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115747252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6547d17a7d1c249a5ee01912cfec6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockData:
+  - name: air
+    model: {fileID: 2197062468539958542, guid: 347f8cb705c107e4e8f5372f372196e0, type: 3}
+  - name: barrier
+    model: {fileID: 604388231842466912, guid: 361aeb03a2649444191a33b4d9780a44, type: 3}
+  - name: bedrock
+    model: {fileID: 1361619543137399785, guid: 965b277ae156e404bb6a6ee7ce913fcc, type: 3}
+  - name: stone
+    model: {fileID: 5125804347229492512, guid: 849dd829a4791304e9cf6e7d9bce7611, type: 3}
+  - name: dirt
+    model: {fileID: 1437554377093615146, guid: d7197c52dff827a40b26d020b18b86c0, type: 3}
+  - name: grass
+    model: {fileID: 4887314937467705929, guid: 2936428878f2d884ba6ca00c437baf49, type: 3}
+  terrain: {fileID: 0}
