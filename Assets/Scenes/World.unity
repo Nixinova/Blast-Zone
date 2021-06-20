@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df404b1f4fd2084aacbaaa6eacbb139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 200
+  sensitivity: 300
   playerBody: {fileID: 851950001}
 --- !u!1 &1918158785
 GameObject:
@@ -523,11 +523,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ca9daf1354c1645a5c43355ba955c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grass: {fileID: 4887314937467705929, guid: 2936428878f2d884ba6ca00c437baf49, type: 3}
-  dirt: {fileID: 1437554377093615146, guid: d7197c52dff827a40b26d020b18b86c0, type: 3}
-  stone: {fileID: 5125804347229492512, guid: 849dd829a4791304e9cf6e7d9bce7611, type: 3}
-  bedrock: {fileID: 1361619543137399785, guid: 965b277ae156e404bb6a6ee7ce913fcc, type: 3}
+  blockData:
+  - name: air
+    model: {fileID: 0}
+  - name: barrier
+    model: {fileID: 604388231842466912, guid: 361aeb03a2649444191a33b4d9780a44, type: 3}
+  - name: stone
+    model: {fileID: 5125804347229492512, guid: 849dd829a4791304e9cf6e7d9bce7611, type: 3}
+  - name: bedrock
+    model: {fileID: 1361619543137399785, guid: 965b277ae156e404bb6a6ee7ce913fcc, type: 3}
+  - name: dirt
+    model: {fileID: 1437554377093615146, guid: d7197c52dff827a40b26d020b18b86c0, type: 3}
+  - name: grass
+    model: {fileID: 4887314937467705929, guid: 2936428878f2d884ba6ca00c437baf49, type: 3}
   terrain: {fileID: 2115747254}
+  groundLevel: 12
+  mapSize: 24
 --- !u!4 &2115747254
 Transform:
   m_ObjectHideFlags: 0
