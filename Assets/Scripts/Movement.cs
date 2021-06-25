@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour {
 
 	public float speed = 6;
 	public float gravity = -30;
-	public float jumpHeight = 4;
+	public float jumpHeight = 1;
 
 	public Transform groundChecker;
 	public float groundDistance = 0.4f;
