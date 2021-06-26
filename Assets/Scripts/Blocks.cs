@@ -5,18 +5,21 @@ using UnityEngine;
 
 public class Blocks : MonoBehaviour {
 
+	public static Transform Terrain;
+	public static Dictionary<string, Transform> Block = new Dictionary<string, Transform>();
+	public static Dictionary<string, PlacedBlockData> PlacedBlocks = new Dictionary<string, PlacedBlockData>();
+
 	[Serializable]
 	public struct BlockData {
 		public string name;
 		public Transform model;
 	}
+	public struct PlacedBlockData {
+		public string name;
+		public GameObject gameObject;
+	}
 	public BlockData[] blockData;
 	public Transform terrain;
-
-	public static Transform Terrain;
-	public static Dictionary<string, Transform> Block = new Dictionary<string, Transform>();
-
-	private static Dictionary<string, GameObject> placedBlocks = new Dictionary<string, GameObject>();
 
 	void Awake() {
 		Terrain = terrain;
@@ -25,24 +28,38 @@ public class Blocks : MonoBehaviour {
 		}
 	}
 
-	public static void SpawnBlock(Transform block, int x, int y, int z) {
-		Transform newBlock = Instantiate(block, new Vector3(x, y, z), block.rotation);
+	/** Retrieve block data from a given location */
+	public static PlacedBlockData GetBlockAt(int x, int y, int z) {
+		string coords = x + "," + y + "," + z;
+		if (!PlacedBlocks.ContainsKey(coords)) {
+			return new PlacedBlockData() { name = "air", gameObject = Block["air"].gameObject };
+		}
+		return PlacedBlocks[coords];
+	}
+	public static PlacedBlockData GetBlockAt(Vector3 pos) {
+		return GetBlockAt((int)pos.x, (int)pos.y, (int)pos.z);
+	}
+
+	/** Spawn a block at a given location */
+	public static void SpawnBlock(string block, int x, int y, int z) {
+		Transform newBlock = Instantiate(Block[block], new Vector3(x, y, z), Block[block].rotation);
 		newBlock.gameObject.layer = LayerMask.NameToLayer("Ground");
 		newBlock.SetParent(Terrain);
 
 		string coords = x + "," + y + "," + z;
-		if (placedBlocks.ContainsKey(coords)) DestroyBlock(x, y, z);
-		placedBlocks.Add(coords, newBlock.gameObject);
+		if (PlacedBlocks.ContainsKey(coords)) DestroyBlock(x, y, z);
+		PlacedBlocks.Add(coords, new PlacedBlockData() { name = block, gameObject = newBlock.gameObject });
 	}
-	public static void SpawnBlock(Transform block, Vector3 pos) {
+	public static void SpawnBlock(string block, Vector3 pos) {
 		SpawnBlock(block, (int)pos.x, (int)pos.y, (int)pos.z);
 	}
 
+	/** Destroy a block from a given location */
 	public static void DestroyBlock(int x, int y, int z) {
 		string coords = x + "," + y + "," + z;
-		if (!placedBlocks.ContainsKey(coords)) return;
-		Destroy(placedBlocks[coords]);
-		placedBlocks.Remove(coords);
+		if (!PlacedBlocks.ContainsKey(coords)) return;
+		Destroy(PlacedBlocks[coords].gameObject);
+		PlacedBlocks.Remove(coords);
 	}
 	public static void DestroyBlock(Vector3 pos) {
 		DestroyBlock((int)pos.x, (int)pos.y, (int)pos.z);

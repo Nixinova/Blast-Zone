@@ -28,11 +28,13 @@ public class Interact : MonoBehaviour {
 					Vector3 delta = new Vector3(Math.Abs(diff.x), Math.Abs(diff.y), Math.Abs(diff.z));
 					bool isInBody = delta.x <= 1 && delta.y <= 2 && delta.z <= 1;
 					if (!isInBody) {
-						SpawnBlock(Block["stone"], pos + face);
+						SpawnBlock("stone", pos + face);
 					}
 				}
 				else {
-					DestroyBlock(pos);
+					if (GetBlockAt(pos).name != "barrier") {
+						DestroyBlock(pos);
+					}
 				}
 			}
 		}

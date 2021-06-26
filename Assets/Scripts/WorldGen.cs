@@ -15,21 +15,21 @@ public class WorldGen : MonoBehaviour {
 		// Generate map
 		for (int i = mapCorner - 1; i < mapSize; i++) {
 			for (int y = bedrockLevel; y <= groundLevel + 10; y++) {
-				SpawnBlock(Block["barrier"], i, y, mapCorner - 1); // z-
-				SpawnBlock(Block["barrier"], i, y, mapSize); // z+
-				if (mapCorner - 1 != i) SpawnBlock(Block["barrier"], mapCorner - 1, y, i); // x-
-				if (mapSize != i) SpawnBlock(Block["barrier"], mapSize, y, i); // x+
+				SpawnBlock("barrier", i, y, mapCorner - 1); // z-
+				SpawnBlock("barrier", i, y, mapSize); // z+
+				if (mapCorner - 1 != i) SpawnBlock("barrier", mapCorner - 1, y, i); // x-
+				if (mapSize != i) SpawnBlock("barrier", mapSize, y, i); // x+
 			}
 		}
 		for (int x = mapCorner; x < mapSize; x++) {
 			for (int z = mapCorner; z < mapSize; z++) {
-				SpawnBlock(Block["grass"], x, groundLevel, z);
-				SpawnBlock(Block["dirt"], x, groundLevel - 1, z);
-				SpawnBlock(Block["dirt"], x, groundLevel - 2, z);
+				SpawnBlock("grass", x, groundLevel, z);
+				SpawnBlock("dirt", x, groundLevel - 1, z);
+				SpawnBlock("dirt", x, groundLevel - 2, z);
 				for (int y = groundLevel - 3; y > bedrockLevel; y--) {
-					SpawnBlock(Block["stone"], x, y, z);
+					SpawnBlock("stone", x, y, z);
 				}
-				SpawnBlock(Block["bedrock"], x, bedrockLevel, z);
+				SpawnBlock("bedrock", x, bedrockLevel, z);
 			}
 		}
 	}
