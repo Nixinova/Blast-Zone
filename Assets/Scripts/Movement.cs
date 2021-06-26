@@ -37,7 +37,7 @@ public class Movement : MonoBehaviour {
 			if (velocity.y < 0) {
 				velocity.y = -1f;
 			}
-			if (Input.GetButtonDown("Jump")) {
+			if (Input.GetButton("Jump")) {
 				velocity.y = Mathf.Sqrt(jumpHeight * gravity * -2);
 			}
 		}
