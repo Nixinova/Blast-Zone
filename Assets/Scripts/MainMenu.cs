@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Menu : MonoBehaviour {
+public class MainMenu : MonoBehaviour {
+
+	void Start() {
+		Cursor.lockState = CursorLockMode.Confined;
+	}
 
 	public void LoadGame() {
 		Debug.Log("Loading World...");
 		SceneManager.LoadScene("World");
 	}
 
-	void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-			Debug.Log("Loading Menu...");
-			SceneManager.LoadScene("Menu");
-		}
-    }
+	public void QuitGame() {
+		Debug.Log("Exiting");
+		Application.Quit();
+	}
 
 }

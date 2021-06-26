@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PauseMenu;
 
 public class Mouse : MonoBehaviour {
 
@@ -14,6 +15,8 @@ public class Mouse : MonoBehaviour {
 	}
 
 	void Update() {
+
+		if (PauseMenu.inMenu) return;
 
 		float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
 		float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;

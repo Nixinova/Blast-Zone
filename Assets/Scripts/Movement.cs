@@ -1,6 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PauseMenu;
 
 public class Movement : MonoBehaviour {
 
@@ -17,10 +18,9 @@ public class Movement : MonoBehaviour {
 	Vector3 velocity;
 	bool isGrounded;
 
-	void Start() {
-	}
-
 	void Update() {
+
+		if (PauseMenu.inMenu) return;
 
 		// Horizontal movement
 
