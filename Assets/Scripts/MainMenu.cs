@@ -7,11 +7,12 @@ public class MainMenu : MonoBehaviour {
 
 	void Start() {
 		Cursor.lockState = CursorLockMode.Confined;
+		Cursor.visible = true;
 	}
 
 	public void LoadGame() {
 		Debug.Log("Loading World...");
-		SceneManager.LoadScene("World");
+		SceneManager.LoadScene("World1");
 	}
 
 	public void QuitGame() {

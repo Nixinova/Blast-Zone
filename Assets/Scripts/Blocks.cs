@@ -6,7 +6,7 @@ using UnityEngine;
 public class Blocks : MonoBehaviour {
 
 	public static Transform Terrain;
-	public static Dictionary<string, Transform> Block = new Dictionary<string, Transform>();
+	public static Dictionary<string, Transform> BlockModels = new Dictionary<string, Transform>();
 	public static Dictionary<string, PlacedBlockData> PlacedBlocks = new Dictionary<string, PlacedBlockData>();
 
 	[Serializable]
@@ -24,7 +24,7 @@ public class Blocks : MonoBehaviour {
 	void Awake() {
 		Terrain = terrain;
 		foreach (BlockData block in blockData) {
-			Block.Add(block.name, block.model);
+			BlockModels.Add(block.name, block.model);
 		}
 	}
 
@@ -32,7 +32,7 @@ public class Blocks : MonoBehaviour {
 	public static PlacedBlockData GetBlockAt(int x, int y, int z) {
 		string coords = x + "," + y + "," + z;
 		if (!PlacedBlocks.ContainsKey(coords)) {
-			return new PlacedBlockData() { name = "air", gameObject = Block["air"].gameObject };
+			return new PlacedBlockData() { name = Block.AIR, gameObject = BlockModels[Block.AIR].gameObject };
 		}
 		return PlacedBlocks[coords];
 	}
@@ -42,7 +42,7 @@ public class Blocks : MonoBehaviour {
 
 	/** Spawn a block at a given location */
 	public static void SpawnBlock(string block, int x, int y, int z) {
-		Transform newBlock = Instantiate(Block[block], new Vector3(x, y, z), Block[block].rotation);
+		Transform newBlock = Instantiate(BlockModels[block], new Vector3(x, y, z), BlockModels[block].rotation);
 		newBlock.gameObject.layer = LayerMask.NameToLayer("Ground");
 		newBlock.SetParent(Terrain);
 
@@ -63,6 +63,22 @@ public class Blocks : MonoBehaviour {
 	}
 	public static void DestroyBlock(Vector3 pos) {
 		DestroyBlock((int)pos.x, (int)pos.y, (int)pos.z);
+	}
+
+	/** Check if a block is breakable */
+	public static bool IsBreakable(string block) {
+		return !(block == Block.AIR || block == Block.BEDROCK || block == Block.BARRIER);
+	}
+
+	/** Blocks */
+	public class Block {
+		public const string AIR = "air";
+		public const string BARRIER = "barrier";
+		public const string BEDROCK = "bedrock";
+		public const string STONE = "stone";
+		public const string DIRT = "dirt";
+		public const string GRASS = "grass";
+		public const string TNT = "tnt";
 	}
 
 }

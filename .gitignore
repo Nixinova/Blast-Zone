@@ -17,8 +17,9 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-# VS cache/options directory
+# Editor files
 .vs/
+.idea/
 
 # Auto-generated solution and project files
 ExportedObj/

@@ -21,6 +21,7 @@ public class PauseMenu : MonoBehaviour {
 	void Update() {
 		if (Input.GetKeyDown(KeyCode.Escape)) {
 			Cursor.lockState = CursorLockMode.Confined;
+			Cursor.visible = true;
 			menuRenderer.enabled = true;
 			inMenu = true;
 			terrain.SetActive(false);
@@ -29,6 +30,7 @@ public class PauseMenu : MonoBehaviour {
 
 	public void ResumeGame() {
 		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 		menuRenderer.enabled = false;
 		inMenu = false;
 		terrain.SetActive(true);
